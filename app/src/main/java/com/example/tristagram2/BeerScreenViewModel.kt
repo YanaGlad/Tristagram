@@ -4,18 +4,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tristagram2.api.Api
-import com.example.tristagram2.api.ApiService
 import com.example.tristagram2.dto.Beer
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BeerScreenViewModel : ViewModel() {
+@HiltViewModel
+class BeerScreenViewModel @Inject constructor(val api: Api) : ViewModel() {
 
     val beerList: MutableLiveData<List<Beer>> = MutableLiveData(listOf())
 
-    val api: Api
+    companion object {
+        const val name = "Samsung It School"
+    }
 
     init {
-        api = ApiService.getInstance("https://api.punkapi.com/v2/").create(Api::class.java)
         this.viewModelScope.launch { getData() }
     }
 

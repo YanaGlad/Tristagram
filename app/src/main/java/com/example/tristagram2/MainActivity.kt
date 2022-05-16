@@ -17,9 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tristagram2.ui.theme.Tristagram2Theme
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tristagram2.dto.Beer
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.hilt.navigation.compose.hiltViewModel
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(
-    model: BeerScreenViewModel = viewModel(),
+    model: BeerScreenViewModel = hiltViewModel<BeerScreenViewModel>(),
 ) {
     val viewState = model.beerList.observeAsState()
 
