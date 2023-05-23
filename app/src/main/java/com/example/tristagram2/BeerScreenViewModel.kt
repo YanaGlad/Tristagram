@@ -7,6 +7,7 @@ import com.example.tristagram2.dto.Beer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,12 +15,7 @@ import javax.inject.Inject
 class BeerScreenViewModel @Inject constructor(val api: Api) : ViewModel() {
 
     private val _beerList: MutableStateFlow<List<Beer>> = MutableStateFlow(listOf())
-    val beerList: StateFlow<List<Beer>>
-        get() = _beerList
-
-    companion object {
-        const val name = "Samsung It School"
-    }
+    val beerList: StateFlow<List<Beer>> = _beerList.asStateFlow()
 
     init {
         this.viewModelScope.launch { getData() }

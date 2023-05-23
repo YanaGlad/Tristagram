@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(
-    model: BeerScreenViewModel = hiltViewModel<BeerScreenViewModel>(),
+    model: BeerScreenViewModel = hiltViewModel(),
 ) {
     val viewState = model.beerList.collectAsState()
 
